@@ -1,7 +1,7 @@
-%% GaborÂË²¨Æ÷
-clc,clear,close all  % ÇåÀíÃüÁîÇø¡¢ÇåÀí¹¤×÷Çø¡¢¹Ø±ÕÏÔÊ¾Í¼ĞÎ
-warning off       % Ïû³ı¾¯¸æ
-feature jit off      % ¼ÓËÙ´úÂëÔËĞĞ
+%% Gaboræ»¤æ³¢å™¨
+clc,clear,close all  % æ¸…ç†å‘½ä»¤åŒºã€æ¸…ç†å·¥ä½œåŒºã€å…³é—­æ˜¾ç¤ºå›¾å½¢
+warning off       % æ¶ˆé™¤è­¦å‘Š
+feature jit off      % åŠ é€Ÿä»£ç è¿è¡Œ
 
 im1 = imread('Train_01.bmp');  
 im2 = imread('Train_02.bmp');
@@ -10,7 +10,7 @@ im4 = imread('Train_04.bmp');
 im5 = imread('Train_05.bmp');  
 im6 = imread('Train_06.bmp');
 im7 = imread('Train_07.bmp');
-im8 = imread('Train_08.bmp');    % ¶ÁÍ¼
+im8 = imread('Train_08.bmp');    % è¯»å›¾
 
 y1 = imread('Original_01.bmp');
 y2 = imread('Original_02.bmp');
@@ -21,23 +21,23 @@ y6 = imread('Original_06.bmp');
 y7 = imread('Original_07.bmp');
 y8 = imread('Original_08.bmp');
 
-subplot(421),imshow(im1);title('Ô­Ê¼Í¼Ïñ1');
-subplot(423),imshow(im2);title('Ô­Ê¼Í¼Ïñ1');
-subplot(425),imshow(im3);title('Ô­Ê¼Í¼Ïñ1');
-subplot(427),imshow(im4);title('Ô­Ê¼Í¼Ïñ1');
+subplot(421),imshow(im1);title('åŸå§‹å›¾åƒ1');
+subplot(423),imshow(im2);title('åŸå§‹å›¾åƒ1');
+subplot(425),imshow(im3);title('åŸå§‹å›¾åƒ1');
+subplot(427),imshow(im4);title('åŸå§‹å›¾åƒ1');
 
 
 [thr,sorh,keepapp] = ddencmp_thr('cmp','wv',im1);  
-im_1 = wpdencmp(im1,sorh,1,'sym4','threshold',thr,keepapp);%wpdencmp º¯Êı¹¦ÄÜ:ÓÃĞ¡²¨°ü½øĞĞĞÅºÅµÄÏûÔë»òÑ¹Ëõ
+im_1 = wpdencmp(im1,sorh,1,'sym4','threshold',thr,keepapp);%wpdencmp å‡½æ•°åŠŸèƒ½:ç”¨å°æ³¢åŒ…è¿›è¡Œä¿¡å·çš„æ¶ˆå™ªæˆ–å‹ç¼©
 im_1 = uint8(im_1);
-Sx = 0.6;   % x·½ÏòµÄ²îÒìÏµÊı
-Sy = 0.265;  % y·½ÏòµÄ²îÒìÏµÊı
-U = 0;    % x·½ÏòµÄÖĞĞÄÆµÂÊ
-V = 0;    % y·½ÏòµÄÖĞĞÄÆµÂÊ
+Sx = 0.6;   % xæ–¹å‘çš„å·®å¼‚ç³»æ•°
+Sy = 0.265;  % yæ–¹å‘çš„å·®å¼‚ç³»æ•°
+U = 0;    % xæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
+V = 0;    % yæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
 [G,im_1] = gabor_filter(im_1,Sx,Sy,U,V);
 [im_1, PSNR3] = bif_filter(im_1,2,0.02);
-subplot(422),imshow(im_1);title('ÂË²¨Í¼Ïñ');
-im_1 = im_1 - 4;
+subplot(422),imshow(im_1);title('æ»¤æ³¢å›¾åƒ');
+%im_1 = im_1 - 4;
 PSNR_01 = psnr(im_1,y1);
 %imwrite(im_1,'Test_01.bmp');
 
@@ -45,109 +45,109 @@ PSNR_01 = psnr(im_1,y1);
 [thr,sorh,keepapp] = ddencmp_thr('cmp','wv',im2);  
 im_2 = wpdencmp(im2,sorh,1,'sym4','threshold',thr,keepapp);
 im_2 = uint8(im_2);
-Sx = 0.6;   % x·½ÏòµÄ²îÒìÏµÊı
-Sy = 0.265;  % y·½ÏòµÄ²îÒìÏµÊı
-U = 0;    % x·½ÏòµÄÖĞĞÄÆµÂÊ
-V = 0;    % y·½ÏòµÄÖĞĞÄÆµÂÊ
+Sx = 0.6;   % xæ–¹å‘çš„å·®å¼‚ç³»æ•°
+Sy = 0.265;  % yæ–¹å‘çš„å·®å¼‚ç³»æ•°
+U = 0;    % xæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
+V = 0;    % yæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
 [G,im_2] = gabor_filter(im_2,Sx,Sy,U,V);
 [im_2, PSNR3] = bif_filter(im_2,2,0.02);
-subplot(424),imshow(im_2);title('Ë«±ßÂË²¨Í¼Ïñ');
-im_2 = im_2 - 4;
+subplot(424),imshow(im_2);title('åŒè¾¹æ»¤æ³¢å›¾åƒ');
+%im_2 = im_2 - 4;
 PSNR_02 = psnr(im_2,y2);
-%imwrite(im_2,'diao2.bmp');
+%imwrite(im_2,'Test_02.bmp');
 
 
 [thr,sorh,keepapp] = ddencmp_thr('cmp','wv',im3);  
 im_3 = wpdencmp(im3,sorh,1,'sym4','threshold',thr,keepapp);
 im_3 = uint8(im_3);
-Sx = 0.6;   % x·½ÏòµÄ²îÒìÏµÊı
-Sy = 0.265;  % y·½ÏòµÄ²îÒìÏµÊı
-U = 0;    % x·½ÏòµÄÖĞĞÄÆµÂÊ
-V = 0;    % y·½ÏòµÄÖĞĞÄÆµÂÊ
+Sx = 0.6;   % xæ–¹å‘çš„å·®å¼‚ç³»æ•°
+Sy = 0.265;  % yæ–¹å‘çš„å·®å¼‚ç³»æ•°
+U = 0;    % xæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
+V = 0;    % yæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
 [G,im_3] = gabor_filter(im_3,Sx,Sy,U,V);
 [im_3, PSNR3] = bif_filter(im_3,2,0.02);
-subplot(426),imshow(im_3);title('Ë«±ßÂË²¨Í¼Ïñ');
-im_3 = im_3 - 4;
+subplot(426),imshow(im_3);title('åŒè¾¹æ»¤æ³¢å›¾åƒ');
+%im_3 = im_3 - 4;
 PSNR_03 = psnr(im_3,y3);
-%imwrite(im_3,'diao3.bmp');
+%imwrite(im_3,'Test_03.bmp');
 
 
 [thr,sorh,keepapp] = ddencmp_thr('cmp','wv',im4);  
 im_4 = wpdencmp(im4,sorh,1,'sym4','threshold',thr,keepapp);
 im_4 = uint8(im_4);
-Sx = 0.6;   % x·½ÏòµÄ²îÒìÏµÊı
-Sy = 0.265;  % y·½ÏòµÄ²îÒìÏµÊı
-U = 0;    % x·½ÏòµÄÖĞĞÄÆµÂÊ
-V = 0;    % y·½ÏòµÄÖĞĞÄÆµÂÊ
+Sx = 0.6;   % xæ–¹å‘çš„å·®å¼‚ç³»æ•°
+Sy = 0.265;  % yæ–¹å‘çš„å·®å¼‚ç³»æ•°
+U = 0;    % xæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
+V = 0;    % yæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
 [G,im_4] = gabor_filter(im_4,Sx,Sy,U,V);
 [im_4, PSNR3] = bif_filter(im_4,2,0.02);
-subplot(428),imshow(im_4);title('Ë«±ßÂË²¨Í¼Ïñ');
-im_4 = im_4 - 4;
+subplot(428),imshow(im_4);title('åŒè¾¹æ»¤æ³¢å›¾åƒ');
+%im_4 = im_4 - 4;
 PSNR_04 = psnr(im_4,y4);
-%imwrite(im_4,'diao4.bmp');
+%imwrite(im_4,'Test_04.bmp');
 
 
 [thr,sorh,keepapp] = ddencmp_thr('cmp','wv',im5);  
 im_5 = wpdencmp(im5,sorh,1,'sym4','threshold',thr,keepapp);
 im_5 = uint8(im_5);
-Sx = 0.6;   % x·½ÏòµÄ²îÒìÏµÊı
-Sy = 0.265;  % y·½ÏòµÄ²îÒìÏµÊı
-U = 0;    % x·½ÏòµÄÖĞĞÄÆµÂÊ
-V = 0;    % y·½ÏòµÄÖĞĞÄÆµÂÊ
+Sx = 0.6;   % xæ–¹å‘çš„å·®å¼‚ç³»æ•°
+Sy = 0.265;  % yæ–¹å‘çš„å·®å¼‚ç³»æ•°
+U = 0;    % xæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
+V = 0;    % yæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
 [G,im_5] = gabor_filter(im_5,Sx,Sy,U,V);
 [im_5, PSNR3] = bif_filter(im_5,2,0.02);
-%subplot(428),imshow(im_5);title('Ë«±ßÂË²¨Í¼Ïñ');
-im_5 = im_5 - 4;
+%subplot(428),imshow(im_5);title('åŒè¾¹æ»¤æ³¢å›¾åƒ');
+%im_5 = im_5 - 4;
 PSNR_05 = psnr(im_5,y5);
-%imwrite(im_5,'diao5.bmp');
+%imwrite(im_5,'Test_05.bmp');
 
 
 
 [thr,sorh,keepapp] = ddencmp_thr('cmp','wv',im6);  
 im_6 = wpdencmp(im6,sorh,1,'sym4','threshold',thr,keepapp);
 im_6 = uint8(im_6);
-Sx = 0.6;   % x·½ÏòµÄ²îÒìÏµÊı
-Sy = 0.265;  % y·½ÏòµÄ²îÒìÏµÊı
-U = 0;    % x·½ÏòµÄÖĞĞÄÆµÂÊ
-V = 0;    % y·½ÏòµÄÖĞĞÄÆµÂÊ
+Sx = 0.6;   % xæ–¹å‘çš„å·®å¼‚ç³»æ•°
+Sy = 0.265;  % yæ–¹å‘çš„å·®å¼‚ç³»æ•°
+U = 0;    % xæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
+V = 0;    % yæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
 [G,im_6] = gabor_filter(im_6,Sx,Sy,U,V);
 [im_6, PSNR3] = bif_filter(im_6,2,0.02);
-%subplot(428),imshow(im_6);title('Ë«±ßÂË²¨Í¼Ïñ');
-im_6 = im_6 - 4;
+%subplot(428),imshow(im_6);title('åŒè¾¹æ»¤æ³¢å›¾åƒ');
+%im_6 = im_6 - 4;
 PSNR_06 = psnr(im_6,y6);
-%imwrite(im_6,'diao6.bmp');
+%imwrite(im_6,'Test_06.bmp');
 
 
 
 [thr,sorh,keepapp] = ddencmp_thr('cmp','wv',im7);  
 im_7 = wpdencmp(im7,sorh,1,'sym4','threshold',thr,keepapp);
 im_7 = uint8(im_7);
-Sx = 0.6;   % x·½ÏòµÄ²îÒìÏµÊı
-Sy = 0.265;  % y·½ÏòµÄ²îÒìÏµÊı
-U = 0;    % x·½ÏòµÄÖĞĞÄÆµÂÊ
-V = 0;    % y·½ÏòµÄÖĞĞÄÆµÂÊ
+Sx = 0.6;   % xæ–¹å‘çš„å·®å¼‚ç³»æ•°
+Sy = 0.265;  % yæ–¹å‘çš„å·®å¼‚ç³»æ•°
+U = 0;    % xæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
+V = 0;    % yæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
 [G,im_7] = gabor_filter(im_7,Sx,Sy,U,V);
 [im_7, PSNR3] = bif_filter(im_7,2,0.02);
-%subplot(428),imshow(im_7);title('Ë«±ßÂË²¨Í¼Ïñ');
-im_7 = im_7 - 4;
+%subplot(428),imshow(im_7);title('åŒè¾¹æ»¤æ³¢å›¾åƒ');
+%im_7 = im_7 - 4;
 PSNR_07 = psnr(im_7,y7);
-%imwrite(im_7,'diao7.bmp');
+%imwrite(im_7,'Test_07.bmp');
 
 
 
 [thr,sorh,keepapp] = ddencmp_thr('cmp','wv',im8);  
 im_8 = wpdencmp(im8,sorh,1,'sym4','threshold',thr,keepapp);
 im_8 = uint8(im_8);
-Sx = 0.6;   % x·½ÏòµÄ²îÒìÏµÊı
-Sy = 0.265;  % y·½ÏòµÄ²îÒìÏµÊı
-U = 0;    % x·½ÏòµÄÖĞĞÄÆµÂÊ
-V = 0;    % y·½ÏòµÄÖĞĞÄÆµÂÊ
+Sx = 0.6;   % xæ–¹å‘çš„å·®å¼‚ç³»æ•°
+Sy = 0.265;  % yæ–¹å‘çš„å·®å¼‚ç³»æ•°
+U = 0;    % xæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
+V = 0;    % yæ–¹å‘çš„ä¸­å¿ƒé¢‘ç‡
 [G,im_8] = gabor_filter(im_8,Sx,Sy,U,V);
 [im_8, PSNR3] = bif_filter(im_8,2,0.02);
-%subplot(428),imshow(im_8);title('Ë«±ßÂË²¨Í¼Ïñ');
-im_8 = im_8 - 4;
+%subplot(428),imshow(im_8);title('åŒè¾¹æ»¤æ³¢å›¾åƒ');
+%im_8 = im_8 - 4;
 PSNR_08 = psnr(im_8,y8);
-%imwrite(im_8,'diao8.bmp');
+%imwrite(im_8,'Test_08.bmp');
 
 
 PSNR_avg = (PSNR_01+PSNR_02+PSNR_03+PSNR_04+PSNR_05+PSNR_06+PSNR_07+PSNR_08)/8;
